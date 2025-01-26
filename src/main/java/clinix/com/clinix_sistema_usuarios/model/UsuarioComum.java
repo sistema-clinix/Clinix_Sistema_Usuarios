@@ -1,0 +1,50 @@
+package clinix.com.clinix_sistema_usuarios.model;
+
+import jakarta.persistence.DiscriminatorValue;
+import jakarta.persistence.Entity;
+import jakarta.persistence.Table;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.Setter;
+
+import java.util.Date;
+
+@Getter
+@Setter
+@Entity
+@DiscriminatorValue("COMUM")
+public class UsuarioComum extends Usuario{
+
+    private String CPF;
+    private String RG;
+
+    @Getter
+    private boolean enabled = true; //precisa desse atributo?
+    private Date dataCadastro;
+
+    public void bloquear() {
+        this.enabled = false;
+    }
+
+    public void desbloquear() {
+        this.enabled = true;
+    }
+
+    @Override
+    public void atualizar(Usuario outroUsuario) {
+
+    }
+
+    /*
+    @Override
+    public void atualizar(Usuario outroUsuario) {
+        if (outroUsuario instanceof UsuarioComum u) {
+            this.setNome(u.getNome());
+            this.setEmail(u.getEmail());
+            this.setNomeUsuario(u.getNomeUsuario());
+        }
+
+
+     */
+
+}
