@@ -39,6 +39,7 @@ public class UsuarioController {
 
     @PostMapping("/save")
     public Usuario criar(@RequestBody UsuarioComum usuario) {
+        System.out.println("Recebendo usuário: " + usuario);
         return this.usuarioService.salvar(usuario);
     }
 

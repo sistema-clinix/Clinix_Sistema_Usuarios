@@ -23,17 +23,17 @@ public abstract class Usuario {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(nullable = false)
+    //@Column(nullable = false)
     @NotBlank(message = "O nome é obrigatório.")
     private String nome;
 
     @NotBlank(message = "O nome de usuário é obrigatório.")
-    @Column(unique = true, nullable = false)
+    //@Column(unique = true, nullable = false)
     private String nomeUsuario;
 
     @Email(message = "Por favor, insira um email válido.")
     @NotBlank(message = "O email é obrigatório.")
-    @Column(unique = true, nullable = false)
+    //@Column(unique = true, nullable = false)
     private String email;
 
     @JsonIgnore
@@ -42,6 +42,18 @@ public abstract class Usuario {
     private String senha;
 
     public abstract void atualizar(Usuario outroUsuario);
+
+    public String getNome() { return nome; }
+    public void setNome(String nome) { this.nome = nome; }
+
+    public String getNomeUsuario() { return nomeUsuario; }
+    public void setNomeUsuario(String nomeUsuario) { this.nomeUsuario = nomeUsuario; }
+
+    public String getEmail() { return email; }
+    public void setEmail(String email) { this.email = email; }
+
+    public String getSenha() { return senha; }
+    public void setSenha(String senha) { this.senha = senha; }
 
 
 }

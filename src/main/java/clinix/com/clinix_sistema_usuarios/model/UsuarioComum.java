@@ -22,6 +22,10 @@ public class UsuarioComum extends Usuario{
     private boolean enabled = true;
     private Date dataCadastro;
 
+    public UsuarioComum() {
+        super();
+    }
+
     public void bloquear() {
         this.enabled = false;
     }
