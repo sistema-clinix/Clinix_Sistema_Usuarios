@@ -42,7 +42,7 @@ public class UsuarioController {
 
     }
 
-    @GetMapping
+    @GetMapping("/list")
     public List<Usuario> listar() {
         return usuarioService.listarTodos();
     }
@@ -52,7 +52,7 @@ public class UsuarioController {
         return usuarioService.buscarPorId(id);
     }
 
-    @PutMapping("/{id}")
+    @PutMappi   ng("/{id}")
     public Usuario atualizar(@PathVariable Integer id, @RequestBody Usuario usuario) {
         return usuarioService.atualizar(id, usuario);
     }
