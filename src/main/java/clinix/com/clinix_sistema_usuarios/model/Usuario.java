@@ -1,6 +1,7 @@
 package clinix.com.clinix_sistema_usuarios.model;
 
 import clinix.com.clinix_sistema_usuarios.repository.UsuarioRepository;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
@@ -10,6 +11,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Data
+@Entity
 @Table(name = "tb_user")
 @NoArgsConstructor
 @AllArgsConstructor
@@ -34,6 +36,7 @@ public abstract class Usuario {
     @Column(unique = true, nullable = false)
     private String email;
 
+    @JsonIgnore
     @Size(max = 60)
     @NotBlank(message = "A senha é obrigatória e não pode estar vazia.")
     private String senha;
