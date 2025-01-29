@@ -12,15 +12,19 @@ import java.util.Date;
 @Getter
 @Setter
 @Entity
-@DiscriminatorValue("COMUM")
+@Table(name = "tb_usuario_comum")
 public class UsuarioComum extends Usuario{
 
     private String CPF;
     private String RG;
 
     @Getter
-    private boolean enabled = true; //precisa desse atributo?
+    private boolean enabled = true;
     private Date dataCadastro;
+
+    public UsuarioComum() {
+        super();
+    }
 
     public void bloquear() {
         this.enabled = false;
@@ -32,19 +36,5 @@ public class UsuarioComum extends Usuario{
 
     @Override
     public void atualizar(Usuario outroUsuario) {
-
     }
-
-    /*
-    @Override
-    public void atualizar(Usuario outroUsuario) {
-        if (outroUsuario instanceof UsuarioComum u) {
-            this.setNome(u.getNome());
-            this.setEmail(u.getEmail());
-            this.setNomeUsuario(u.getNomeUsuario());
-        }
-
-
-     */
-
 }
