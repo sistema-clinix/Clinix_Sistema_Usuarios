@@ -43,12 +43,12 @@ public class MedicoController {
         return this.medicoService.salvar(medico);
     }
 
-    @PutMapping("/{id}")
+    @PutMapping("/update/{id}")
     public Medico atualizar(@RequestBody Medico medico) {
         return this.medicoService.atualizar(medico);
     }
 
-    @DeleteMapping("/{id}")
+    @DeleteMapping("/delete/{id}")
     public void deletar(@PathVariable Long id) {
         this.medicoService.deletar(id);
     }
