@@ -37,12 +37,12 @@ public class PacienteController {
         return this.pacienteService.salvar(paciente);
     }
 
-    @PutMapping("/{id}")
+    @PutMapping("/update/{id}")
     public Paciente atualizar(@RequestBody Paciente paciente) {
         return this.pacienteService.atualizar(paciente);
     }
 
-    @DeleteMapping("/{id}")
+    @DeleteMapping("/delete/{id}")
     public void deletar(@PathVariable Long id) {
         this.pacienteService.deletar(id);
     }

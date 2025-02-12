@@ -1,9 +1,7 @@
 package clinix.com.clinix_sistema_usuarios.controller;
 
 import clinix.com.clinix_sistema_usuarios.model.Gerente;
-import clinix.com.clinix_sistema_usuarios.model.Paciente;
 import clinix.com.clinix_sistema_usuarios.service.GerenteService;
-import clinix.com.clinix_sistema_usuarios.service.PacienteService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -37,6 +35,7 @@ public class GerenteController {
         return this.gerenteService.salvar(gerente);
     }
 
+
     @PutMapping("/{id}")
     public Gerente atualizar(@RequestBody Gerente gerente) {
         return this.gerenteService.atualizar(gerente);
@@ -46,4 +45,12 @@ public class GerenteController {
     public void deletar(@PathVariable Long id) {
         this.gerenteService.deletar(id);
     }
+
+    /*
+    @GetMapping("/{id}/clinicas")  // 🔹 Novo endpoint
+    public List<Clinica> listarClinicas(@PathVariable Long id) {
+        return gerenteService.listarClinicasPorGerente(id);
+    }
+
+     */
 }

@@ -1,20 +1,29 @@
 package clinix.com.clinix_sistema_usuarios.model;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
 
 import java.sql.Time;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Table(name = "tb_medico")
 public class Medico extends Usuario{
     //private List<Clinica> clinicasVinculadas;
     //private Especialidade especialidade;
+
     //private List<Agendamento> consultasAgendadas;
     //private List<Consulta> consultasRealizadas;
+
+    @OneToMany(mappedBy = "medico", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<HorarioAtendimento> horariosAtendimento = new ArrayList<>();
+
 
     @Getter
     @Setter

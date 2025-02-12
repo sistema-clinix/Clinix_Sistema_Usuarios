@@ -1,9 +1,7 @@
 package clinix.com.clinix_sistema_usuarios.service;
 
 import clinix.com.clinix_sistema_usuarios.model.Gerente;
-import clinix.com.clinix_sistema_usuarios.model.Paciente;
 import clinix.com.clinix_sistema_usuarios.repository.GerenteRepository;
-import clinix.com.clinix_sistema_usuarios.repository.PacienteRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
