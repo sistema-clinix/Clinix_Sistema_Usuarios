@@ -32,6 +32,11 @@ public class HorarioAtendimentoController {
         return horarioAtendimentoService.listarHorariosIndisponiveis(medicoId);
     }
 
+    @GetMapping("/listHorarios/{medicoId}")
+    public List<HorarioAtendimento> listarTodosHorarios(@PathVariable Long medicoId) {
+        return horarioAtendimentoService.listarTodosHorarios(medicoId);
+    }
+
     @PostMapping("/reservar/{horarioId}/{pacienteId}")
     public HorarioAtendimento reservarHorario(@PathVariable Long horarioId, @PathVariable Long pacienteId) {
         Paciente paciente = pacienteService.buscarPorId(pacienteId);

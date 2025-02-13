@@ -26,6 +26,10 @@ public class HorarioAtendimentoService {
         return horarioAtendimentoRepository.findByMedicoIdAndReservadoTrue(medicoId);
     }
 
+    public List<HorarioAtendimento> listarTodosHorarios(Long medicoId) {
+        return horarioAtendimentoRepository.findByMedicoId(medicoId);
+    }
+
     public HorarioAtendimento reservarHorario(Long horarioId, Paciente paciente) {
         Optional<HorarioAtendimento> optionalHorario = horarioAtendimentoRepository.findById(horarioId);
 
