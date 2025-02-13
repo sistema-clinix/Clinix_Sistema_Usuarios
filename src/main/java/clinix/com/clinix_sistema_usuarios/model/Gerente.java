@@ -1,12 +1,19 @@
 package clinix.com.clinix_sistema_usuarios.model;
+import java.util.ArrayList;
+import java.util.List;
+
 import jakarta.persistence.*;
+import lombok.Data;
 
 @Entity
 @Table(name = "tb_gerente")
+@Data
 public class Gerente extends Usuario {
-
-    //@OneToMany(mappedBy = "gerente", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    //private List<Clinica> clinicas = new ArrayList<>();
+    
+    @ElementCollection
+    @CollectionTable(name = "tb_gerente_clinica", joinColumns = @JoinColumn(name = "g_id"))
+    @Column(name= "clinica_id")
+    private List<Long> clinicas_id = new ArrayList<>();
 
     public Gerente(String nome, String nomeUsuario, String email, String senha, String cpf, String rg) {
         super(nome, nomeUsuario, email, senha, cpf, rg);
@@ -27,34 +34,18 @@ public class Gerente extends Usuario {
             this.setRg(outroGerente.getRg());
         }
     }
-    /*
-    public void cadastrarClinica(Clinica clinica) {
-        if (!clinicas.contains(clinica)) {
-            clinicas.add(clinica);
-            //clinica.setGerente(this);
-            System.out.println("Clínica cadastrada com sucesso: " + clinica.getNomeFantasia());
-        } else {
-            System.out.println("A clínica já está cadastrada.");
-        }
+    
+    public boolean cadastrarClinica(Long c_id){
+        if (this.clinicas_id.contains(c_id)) return false;
+        return clinicas_id.add(c_id);
+    }
+    
+    public boolean removerClinica( Long c_id){
+        if (!this.clinicas_id.contains(c_id)) return false;
+        return clinicas_id.remove(c_id);
     }
 
-    public void removerClinica(Clinica clinica) {
-        if (clinicas.contains(clinica)) {
-            clinicas.remove(clinica);
-            //clinica.setGerente(null);
-            System.out.println("Clínica removida com sucesso: " + clinica.getNomeFantasia());
-        } else {
-            System.out.println("A clínica não está cadastrada.");
-        }
+    public List<Long> listarClinicas(){
+        return new ArrayList<>(this.clinicas_id);
     }
-
-    // Getters e Setters
-    public  List<Clinica> getClinicas() {
-        return clinicas;
-    }
-
-    public void setClinicas(List<Clinica> clinicas) {
-        this.clinicas = clinicas;
-    }
-    */
 }

@@ -1,11 +1,14 @@
 package clinix.com.clinix_sistema_usuarios.controller;
 
+import clinix.com.clinix_sistema_usuarios.dto.ClinicaDTO;
 import clinix.com.clinix_sistema_usuarios.model.Gerente;
 import clinix.com.clinix_sistema_usuarios.service.GerenteService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import org.springframework.web.bind.annotation.GetMapping;
+
 
 @RestController
 @RequestMapping("/gerente")
@@ -46,11 +49,17 @@ public class GerenteController {
         this.gerenteService.deletar(id);
     }
 
-    /*
-    @GetMapping("/{id}/clinicas")  // 🔹 Novo endpoint
-    public List<Clinica> listarClinicas(@PathVariable Long id) {
-        return gerenteService.listarClinicasPorGerente(id);
+    @GetMapping("/{id}/clinicas")  // listar clinicas
+    public List<Long> listarClinicas(@PathVariable Long id) {
+        return gerenteService.listarClinicas(id);
     }
-
-     */
+    @PutMapping("/{id}/clinica/registrar")  // 🔹 atualiza o banco de dados cadastrando um novo registro de clínica e atualizando o gerente do id informado
+    public boolean cadastrarClinica(@PathVariable("id") Long g_id, @RequestBody ClinicaDTO c){
+        return gerenteService.cadastrarClinica(g_id, c);
+    }
+    @PutMapping("/{id}/clinica/remover")  // 
+    public boolean removerClinica(@PathVariable("id") Long g_id, @RequestBody ClinicaDTO c){
+        return gerenteService.removerClinica(g_id, c);
+    }
+    
 }

@@ -1,6 +1,8 @@
 package clinix.com.clinix_sistema_usuarios.service;
 
+import clinix.com.clinix_sistema_usuarios.dto.ClinicaDTO;
 import clinix.com.clinix_sistema_usuarios.model.Gerente;
+import clinix.com.clinix_sistema_usuarios.model.NullGerente;
 import clinix.com.clinix_sistema_usuarios.repository.GerenteRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -38,5 +40,48 @@ public class GerenteService {
         this.gerenteRepository.deleteById(id);
     }
 
+    public List<Long> listarClinicas(Long g_id) {
+        Gerente g = this.gerenteRepository.findById(g_id).orElse(new NullGerente());
+        return g.getClinicas_id();
+    }
+    
+/*     public Gerente findGerenteByClinic(ClinicaDTO c){
+        return this.gerenteRepository.findByClinicaId(c.id()).orElse( new NullGerente());
+    } */
+    
+    /**
+     * Armazena a referência do id de uma clínica a um determinado gerente
+     * @param g_id id do gerente
+     * @param c objeto DTO da Clinica
+     * @return
+     */
+    public Boolean cadastrarClinica(Long g_id, ClinicaDTO c) {
+        Gerente g = this.gerenteRepository.findById(g_id).orElse(new NullGerente());
+        if(g.isNull()){
+            return false;
+        }
+        g.cadastrarClinica(c.id());
+        salvar(g);
+        return true;
+    }
+
+    /**
+     * Remove a referência do id de uma clínica a um determinado gerente
+     * @param g_id
+     * @param c
+     * @return
+     */
+    public Boolean removerClinica(Long g_id, ClinicaDTO c) {
+        Gerente g = this.gerenteRepository.findById(g_id).orElse(new NullGerente());
+        
+        /******* TO DO **********/
+        /******* Regras negociais **********/
+        if(g.isNull()){
+            return false;
+        }
+        g.removerClinica(c.id());
+        salvar(g);
+        return true;
+    }
 
 }
