@@ -46,7 +46,7 @@ public class HorarioAtendimentoController {
         return horarioAtendimentoService.reservarHorario(horarioId, paciente);
     }
 
-    @DeleteMapping("/excluir/{horarioId}")
+    @DeleteMapping("/delete/{horarioId}")
     public void excluirHorario(@PathVariable Long horarioId) {
         horarioAtendimentoService.excluirHorario(horarioId);
     }
