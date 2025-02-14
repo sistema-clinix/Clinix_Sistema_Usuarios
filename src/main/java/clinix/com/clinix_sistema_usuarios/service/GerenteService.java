@@ -10,7 +10,6 @@ import java.util.List;
 @Service
 public class GerenteService {
 
-
     private final GerenteRepository gerenteRepository;
 
     @Autowired
@@ -38,5 +37,55 @@ public class GerenteService {
         this.gerenteRepository.deleteById(id);
     }
 
+<<<<<<< Updated upstream
+=======
+    public List<Long> listarClinicas(Long g_id) {
+        Gerente g = this.gerenteRepository.findById(g_id).orElse(new NullGerente());
+        return g.getClinicas_id();
+    }
+    
+/*     public Gerente findGerenteByClinic(ClinicaDTO c){
+        return this.gerenteRepository.findByClinicaId(c.id()).orElse( new NullGerente());
+    } */
+    
+    /**
+     * Armazena a referência do id de uma clínica a um determinado gerente
+     * @param g_id id do gerente
+     * @param c objeto DTO da Clinica
+     * @return
+     */
+    public Boolean cadastrarClinica(Long g_id, ClinicaDTO c) {
+        Gerente g = this.gerenteRepository.findById(g_id).orElse(new NullGerente());
+        if(g.isNull() || this.checkClinicaExiste(c.id())){
+            return false;
+        }
+        g.cadastrarClinica(c.id());
+        salvar(g);
+        return true;
+    }
+
+    /**
+     * Remove a referência do id de uma clínica a um determinado gerente
+     * @param g_id
+     * @param c
+     * @return
+     */
+    public Boolean removerClinica(Long g_id, ClinicaDTO c) {
+        Gerente g = this.gerenteRepository.findById(g_id).orElse(new NullGerente());
+        
+        /******* TO DO **********/
+        /******* Regras negociais **********/
+        if(g.isNull() || !this.checkClinicaExiste(c.id())) {
+            return false;
+        }
+        g.removerClinica(c.id());
+        salvar(g);
+        return true;
+    }
+>>>>>>> Stashed changes
+
+    public boolean checkClinicaExiste(Long c_id){
+        return this.gerenteRepository.existsByClinicaId(c_id);
+    }
 
 }
