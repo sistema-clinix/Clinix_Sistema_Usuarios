@@ -11,4 +11,5 @@ public interface HorarioAtendimentoRepository extends JpaRepository<HorarioAtend
     List<HorarioAtendimento> findByMedicoIdAndReservadoTrue(Long medicoId);
 
     List<HorarioAtendimento> findByMedicoId(Long medicoId);
+
 }
