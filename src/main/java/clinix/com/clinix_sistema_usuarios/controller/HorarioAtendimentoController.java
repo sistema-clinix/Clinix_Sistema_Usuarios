@@ -21,7 +21,10 @@ public class HorarioAtendimentoController {
         this.horarioAtendimentoService = horarioAtendimentoService;
         this.pacienteService = pacienteService;
     }
-
+    @GetMapping("/")
+    public List<HorarioAtendimento> listarHorarios() {
+        return horarioAtendimentoService.listarHorarios();
+    }
     @GetMapping("/disponiveis/{medicoId}")
     public List<HorarioAtendimento> listarHorariosDisponiveis(@PathVariable Long medicoId) {
         return horarioAtendimentoService.listarHorariosDisponiveis(medicoId);
@@ -42,4 +45,10 @@ public class HorarioAtendimentoController {
         Paciente paciente = pacienteService.buscarPorId(pacienteId);
         return horarioAtendimentoService.reservarHorario(horarioId, paciente);
     }
+
+    @DeleteMapping("/delete/{horarioId}")
+    public void excluirHorario(@PathVariable Long horarioId) {
+        horarioAtendimentoService.excluirHorario(horarioId);
+    }
+
 }

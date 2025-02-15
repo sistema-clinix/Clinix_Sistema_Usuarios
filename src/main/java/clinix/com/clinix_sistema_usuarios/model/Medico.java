@@ -1,22 +1,31 @@
 package clinix.com.clinix_sistema_usuarios.model;
 
 import jakarta.persistence.CascadeType;
+import jakarta.persistence.CollectionTable;
+import jakarta.persistence.Column;
+import jakarta.persistence.ElementCollection;
 import jakarta.persistence.Entity;
+import jakarta.persistence.JoinColumn;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import lombok.Data;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.EqualsAndHashCode;
 
 import java.sql.Time;
 import java.util.ArrayList;
 import java.util.List;
 
 @Entity
+@Data
+@EqualsAndHashCode(callSuper=false)
 @Table(name = "tb_medico")
 public class Medico extends Usuario{
-    //private List<Clinica> clinicasVinculadas;
-    //private Especialidade especialidade;
+    
+    @ElementCollection
+    @CollectionTable(name = "tb_medico_clinica", joinColumns = @JoinColumn(name = "m_id"))
+    @Column(name= "c_id")
+    private List<Long> clinicas_id = new ArrayList<>();
+
 
     //private List<Agendamento> consultasAgendadas;
     //private List<Consulta> consultasRealizadas;
@@ -24,17 +33,10 @@ public class Medico extends Usuario{
     @OneToMany(mappedBy = "medico", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<HorarioAtendimento> horariosAtendimento = new ArrayList<>();
 
-
-    @Getter
-    @Setter
     private String crm;
 
-    @Getter
-    @Setter
     private Time inicioAtendimento;
 
-    @Getter
-    @Setter
     private Time finalAtendimento;
 
 
@@ -98,7 +100,7 @@ public class Medico extends Usuario{
         }
     }
 
-    // Getters e Setters
+s e Setters
     public List<Clinica> getClinicasVinculadas() {
         return clinicasVinculadas;
     }
@@ -114,6 +116,19 @@ public class Medico extends Usuario{
 
     @Override
     public void atualizar(Usuario outroUsuario) {
+    }
 
+    public boolean vincular(Long c_id){
+        if (this.clinicas_id.contains(c_id)) return false;
+        return clinicas_id.add(c_id);
+    }
+    
+    public boolean desvincular( Long c_id){
+        if (!this.clinicas_id.contains(c_id)) return false;
+        return clinicas_id.remove(c_id);
+    }
+
+    public List<Long> listarClinicas(){
+        return new ArrayList<>(this.clinicas_id);
     }
 }

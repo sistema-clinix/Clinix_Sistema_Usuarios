@@ -15,6 +15,8 @@ public interface GerenteRepository extends JpaRepository<Gerente, Long> {
     Optional<Gerente> findByClinicaId(@Param("clinicaId") Long clinicaId);
  */
 
+ @Query(value = "SELECT COUNT(*) > 0 FROM tb_gerente_clinica WHERE clinica_id = :clinicaId", nativeQuery = true)
+ boolean existsByClinicaId(@Param("clinicaId") Long clinicaId);
 }
 
 

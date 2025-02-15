@@ -18,6 +18,10 @@ public class HorarioAtendimentoService {
         this.horarioAtendimentoRepository = horarioAtendimentoRepository;
     }
 
+    public List<HorarioAtendimento> listarHorarios() {
+        return horarioAtendimentoRepository.findAll();
+    }
+
     public List<HorarioAtendimento> listarHorariosDisponiveis(Long medicoId) {
         return horarioAtendimentoRepository.findByMedicoIdAndReservadoFalse(medicoId);
     }
@@ -43,4 +47,14 @@ public class HorarioAtendimentoService {
         }
         throw new RuntimeException("Horário não disponível.");
     }
+
+    public void excluirHorario(Long horarioId) {
+        if (horarioAtendimentoRepository.existsById(horarioId)) {
+            horarioAtendimentoRepository.deleteById(horarioId);
+        } else {
+            throw new RuntimeException("Horário não encontrado.");
+        }
+    }
+
+
 }

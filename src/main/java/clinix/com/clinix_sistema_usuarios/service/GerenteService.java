@@ -12,7 +12,6 @@ import java.util.List;
 @Service
 public class GerenteService {
 
-
     private final GerenteRepository gerenteRepository;
 
     @Autowired
@@ -39,7 +38,6 @@ public class GerenteService {
     public void deletar(Long id) {
         this.gerenteRepository.deleteById(id);
     }
-
     public List<Long> listarClinicas(Long g_id) {
         Gerente g = this.gerenteRepository.findById(g_id).orElse(new NullGerente());
         return g.getClinicas_id();
@@ -84,4 +82,7 @@ public class GerenteService {
         return true;
     }
 
+    public boolean checkClinicaExiste(Long c_id){
+        return this.gerenteRepository.existsByClinicaId(c_id);
+    }
 }
