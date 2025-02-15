@@ -1,9 +1,7 @@
 package clinix.com.clinix_sistema_usuarios.controller;
 
 import clinix.com.clinix_sistema_usuarios.model.Paciente;
-import clinix.com.clinix_sistema_usuarios.model.Usuario;
 import clinix.com.clinix_sistema_usuarios.service.PacienteService;
-import clinix.com.clinix_sistema_usuarios.service.UsuarioService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 

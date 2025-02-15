@@ -1,6 +1,8 @@
 package clinix.com.clinix_sistema_usuarios.service;
 
+import clinix.com.clinix_sistema_usuarios.dto.ClinicaDTO;
 import clinix.com.clinix_sistema_usuarios.model.Gerente;
+import clinix.com.clinix_sistema_usuarios.model.NullGerente;
 import clinix.com.clinix_sistema_usuarios.repository.GerenteRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -36,9 +38,6 @@ public class GerenteService {
     public void deletar(Long id) {
         this.gerenteRepository.deleteById(id);
     }
-
-<<<<<<< Updated upstream
-=======
     public List<Long> listarClinicas(Long g_id) {
         Gerente g = this.gerenteRepository.findById(g_id).orElse(new NullGerente());
         return g.getClinicas_id();
@@ -56,7 +55,7 @@ public class GerenteService {
      */
     public Boolean cadastrarClinica(Long g_id, ClinicaDTO c) {
         Gerente g = this.gerenteRepository.findById(g_id).orElse(new NullGerente());
-        if(g.isNull() || this.checkClinicaExiste(c.id())){
+        if(g.isNull()){
             return false;
         }
         g.cadastrarClinica(c.id());
@@ -75,17 +74,15 @@ public class GerenteService {
         
         /******* TO DO **********/
         /******* Regras negociais **********/
-        if(g.isNull() || !this.checkClinicaExiste(c.id())) {
+        if(g.isNull()){
             return false;
         }
         g.removerClinica(c.id());
         salvar(g);
         return true;
     }
->>>>>>> Stashed changes
 
     public boolean checkClinicaExiste(Long c_id){
         return this.gerenteRepository.existsByClinicaId(c_id);
     }
-
 }

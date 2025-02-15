@@ -142,4 +142,8 @@ public abstract class Usuario {
         this.senha = senha;
     }
 
+    public boolean isNull(){
+        return false;   
+    }
+
 }
