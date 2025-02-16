@@ -43,31 +43,29 @@ public class MedicoService {
         this.medicoRepository.deleteById(id);
     }
 
-    public List<Long> listarClinicas(Long m_id) {
-        Medico m = this.medicoRepository.findById(m_id).orElse(new NullMedico());
-        return m.listarClinicas();
+    public List<Long> listarHorariosPorMedico(Long medicoId) {
+        Medico medico = buscarPorId(medicoId);
+        return medico != null ? medico.getHorariosAtendimento() : null;
     }
 
-//    public boolean vincular(Long m_id, Long c_id) {
-//        Medico m = this.medicoRepository.findById(m_id).orElse(new NullMedico());
-//        if (!m.isNull() && this.gerenteService.checkClinicaExiste(c_id)) {
-//            if (!m.getClinicas_id().contains(c_id)){
-//                m.vincular(c_id);
-//                this.salvar(m);
-//                return true;
-//            }
-//        }
-//        return false;
-//    }
+    public boolean vincularHorario(Long medicoId, Long horarioId) {
+        Medico medico = buscarPorId(medicoId);
+        if (medico != null && !medico.getHorariosAtendimento().contains(horarioId)) {
+            medico.getHorariosAtendimento().add(horarioId);
+            medicoRepository.save(medico);
+            return true;
+        }
+        return false;
+    }
 
-//    public boolean desvincular(Long m_id, Long c_id) {
-//        Medico m = this.medicoRepository.findById(m_id).orElse(new NullMedico());
-//        if (!m.isNull() && m.getClinicas_id().contains(c_id)) {
-//                m.desvincular(c_id);
-//                this.salvar(m);
-//                return true;
-//            }
-//        return false;
-//    }
+    public boolean desvincularHorario(Long medicoId, Long horarioId) {
+        Medico medico = buscarPorId(medicoId);
+        if (medico != null && medico.getHorariosAtendimento().contains(horarioId)) {
+            medico.getHorariosAtendimento().remove(horarioId);
+            medicoRepository.save(medico);
+            return true;
+        }
+        return false;
+    }
 
 }

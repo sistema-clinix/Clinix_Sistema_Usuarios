@@ -1,14 +1,14 @@
 package clinix.com.clinix_sistema_usuarios.controller;
 
-import clinix.com.clinix_sistema_usuarios.model.HorarioAtendimento;
 import clinix.com.clinix_sistema_usuarios.model.Medico;
-import clinix.com.clinix_sistema_usuarios.repository.HorarioAtendimentoRepository;
+//import clinix.com.clinix_sistema_usuarios.repository.HorarioAtendimentoRepository;
 import clinix.com.clinix_sistema_usuarios.service.MedicoService;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import scheduling.SchedulingServiceGrpc;
 
 import java.util.List;
 
@@ -16,14 +16,14 @@ import java.util.List;
 @RequestMapping("/medico")
 public class MedicoController {
 
-    private MedicoService medicoService;
-    private final HorarioAtendimentoRepository horarioAtendimentoRepository;
+    private final MedicoService medicoService;
+    private final SchedulingServiceGrpc.SchedulingServiceBlockingStub schedulingStub;
 
     @Autowired
-    public MedicoController(MedicoService medicoService, HorarioAtendimentoRepository horarioAtendimentoRepository) {
+    public MedicoController(MedicoService medicoService, SchedulingServiceGrpc.SchedulingServiceBlockingStub schedulingStub) {
 
         this.medicoService = medicoService;
-        this.horarioAtendimentoRepository = horarioAtendimentoRepository;
+        this.schedulingStub = schedulingStub;
     }
 
     @GetMapping("/list")
@@ -52,35 +52,34 @@ public class MedicoController {
         this.medicoService.deletar(id);
     }
 
-    @PostMapping("/{id}/horarios")
-    public ResponseEntity<String> adicionarHorarios(@PathVariable Long id, @RequestBody List<HorarioAtendimento> horarios) {
-        Medico medico = medicoService.buscarPorId(id);
-        if (medico == null) {
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Médico não encontrado.");
-        }
-
-        for (HorarioAtendimento horario : horarios) {
-            horario.setMedico(medico);
-            horarioAtendimentoRepository.save(horario);
-        }
-
-        return ResponseEntity.ok("Horários adicionados com sucesso!");
-    }
-
-    @GetMapping("/{id}/clinicas")  // listar clinicas
-    public List<Long> listarClinicas(@PathVariable Long id) {
-        return medicoService.listarClinicas(id);
-    }
-
-//    //  levando em consideração que existe uma referência a clínica no banco de dados datualiza o banco de dados cadastrando um novo registro de clínica e atualizando o gerente do id informado
-//    @PutMapping("/vincular/{m_id}/{c_id}")
-//    public boolean cadastrarClinica(@PathVariable("m_id") Long m_id, @PathVariable("c_id") Long c_id){
-//        return medicoService.vincular(m_id, c_id);
+//    @PostMapping("/{id}/horarios")
+//    public ResponseEntity<String> adicionarHorarios(@PathVariable Long id, @RequestBody List<HorarioAtendimento> horarios) {
+//        Medico medico = medicoService.buscarPorId(id);
+//        if (medico == null) {
+//            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Médico não encontrado.");
+//        }
+//
+//        for (HorarioAtendimento horario : horarios) {
+//            horario.setMedico(medico);
+//            horarioAtendimentoRepository.save(horario);
+//        }
+//
+//        return ResponseEntity.ok("Horários adicionados com sucesso!");
 //    }
 
-//    @PutMapping("/desvincular/{m_id}/{c_id}")  //
-//    public boolean removerClinica(@PathVariable("m_id") Long m_id, @PathVariable("c_id") Long c_id){
-//        return medicoService.desvincular(m_id, c_id);
-//    }
+    @GetMapping("/{id}/horarios")
+    public List<Long> listarHorarios(@PathVariable Long id) {
+        return medicoService.listarHorariosPorMedico(id);
+    }
+
+    @PutMapping("/{id}/horarios/vincular/{horarioId}")
+    public boolean vincularHorario(@PathVariable Long id, @PathVariable Long horarioId) {
+        return medicoService.vincularHorario(id, horarioId);
+    }
+
+    @PutMapping("/{id}/horarios/desvincular/{horarioId}")
+    public boolean desvincularHorario(@PathVariable Long id, @PathVariable Long horarioId) {
+        return medicoService.desvincularHorario(id, horarioId);
+    }
 
 }
