@@ -1,6 +1,7 @@
 package clinix.com.clinix_sistema_usuarios.model;
 
 import clinix.com.clinix_sistema_usuarios.repository.UsuarioRepository;
+import com.fasterxml.jackson.annotation.JsonFormat;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
@@ -13,11 +14,9 @@ import lombok.NoArgsConstructor;
 import java.util.Date;
 
 @Data
-@Entity
-@Table(name = "tb_usuario")
 @NoArgsConstructor
 @AllArgsConstructor
-@Inheritance(strategy = InheritanceType.JOINED)
+@MappedSuperclass
 public abstract class Usuario {
 
     @Id
@@ -37,6 +36,8 @@ public abstract class Usuario {
     private String RG;
 
     private boolean enabled = true;
+
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private Date dataCadastro;
 
     @Email(message = "Por favor, insira um email válido.")

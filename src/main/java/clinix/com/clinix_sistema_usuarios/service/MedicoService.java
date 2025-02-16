@@ -48,26 +48,26 @@ public class MedicoService {
         return m.listarClinicas();
     }
 
-    public boolean vincular(Long m_id, Long c_id) {
-        Medico m = this.medicoRepository.findById(m_id).orElse(new NullMedico());
-        if (!m.isNull() && this.gerenteService.checkClinicaExiste(c_id)) {
-            if (!m.getClinicas_id().contains(c_id)){
-                m.vincular(c_id);
-                this.salvar(m);
-                return true;
-            }
-        }
-        return false;
-    }
+//    public boolean vincular(Long m_id, Long c_id) {
+//        Medico m = this.medicoRepository.findById(m_id).orElse(new NullMedico());
+//        if (!m.isNull() && this.gerenteService.checkClinicaExiste(c_id)) {
+//            if (!m.getClinicas_id().contains(c_id)){
+//                m.vincular(c_id);
+//                this.salvar(m);
+//                return true;
+//            }
+//        }
+//        return false;
+//    }
 
-    public boolean desvincular(Long m_id, Long c_id) {
-        Medico m = this.medicoRepository.findById(m_id).orElse(new NullMedico());
-        if (!m.isNull() && m.getClinicas_id().contains(c_id)) {
-                m.desvincular(c_id);
-                this.salvar(m);
-                return true;
-            }
-        return false;
-    }
+//    public boolean desvincular(Long m_id, Long c_id) {
+//        Medico m = this.medicoRepository.findById(m_id).orElse(new NullMedico());
+//        if (!m.isNull() && m.getClinicas_id().contains(c_id)) {
+//                m.desvincular(c_id);
+//                this.salvar(m);
+//                return true;
+//            }
+//        return false;
+//    }
 
 }
