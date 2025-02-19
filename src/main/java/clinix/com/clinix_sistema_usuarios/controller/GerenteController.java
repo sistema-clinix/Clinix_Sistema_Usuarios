@@ -49,10 +49,11 @@ public class GerenteController {
         this.gerenteService.deletar(id);
     }
 
-    @GetMapping("/{id}/clinicas")  // listar clinicas
-    public List<Long> listarClinicas(@PathVariable Long id) {
-        return gerenteService.listarClinicas(id);
-    }
+//    @GetMapping("/{id}/clinicas")  // listar clinicas
+//    public List<Long> listarClinicas(@PathVariable Long id) {
+//        return gerenteService.listarClinicas(id);
+//    }
+
     @PutMapping("/{id}/clinica/registrar")  // 🔹 atualiza o banco de dados cadastrando um novo registro de clínica e atualizando o gerente do id informado
     public boolean cadastrarClinica(@PathVariable("id") Long g_id, @RequestBody ClinicaDTO c){
         return gerenteService.cadastrarClinica(g_id, c);

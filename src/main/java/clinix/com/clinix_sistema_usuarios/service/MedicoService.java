@@ -1,11 +1,13 @@
 package clinix.com.clinix_sistema_usuarios.service;
 
+import clinix.com.clinix_sistema_usuarios.dto.MedicoRmiDTO;
 import clinix.com.clinix_sistema_usuarios.model.Medico;
 import clinix.com.clinix_sistema_usuarios.model.NullMedico;
 import clinix.com.clinix_sistema_usuarios.repository.MedicoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -28,6 +30,10 @@ public class MedicoService {
         return this.medicoRepository.findById(id).orElse(new NullMedico());
     }
 
+    public MedicoRmiDTO buscarPorIdRmiDto(Long id) {
+        return this.medicoRepository.findMedicoRmiDTOById(id);
+    }
+
     public Medico salvar(Medico medico) {
         return this.medicoRepository.save(medico);
     }
@@ -43,30 +49,18 @@ public class MedicoService {
         this.medicoRepository.deleteById(id);
     }
 
-    public List<Long> listarClinicas(Long m_id) {
-        Medico m = this.medicoRepository.findById(m_id).orElse(new NullMedico());
-        return m.listarClinicas();
+    public List<Long> listarHorariosPorMedico(Long medicoId) {
+        Medico medico = buscarPorId(medicoId);
+        return medico != null ? medico.getHorariosAtendimento() : null;
     }
 
-    public boolean vincular(Long m_id, Long c_id) {
-        Medico m = this.medicoRepository.findById(m_id).orElse(new NullMedico());
-        if (!m.isNull() && this.gerenteService.checkClinicaExiste(c_id)) {
-            if (!m.getClinicas_id().contains(c_id)){
-                m.vincular(c_id);
-                this.salvar(m);
-                return true;
-            }
+    public boolean desvincularHorario(Long medicoId, Long horarioId) {
+        Medico medico = buscarPorId(medicoId);
+        if (medico != null && medico.getHorariosAtendimento().contains(horarioId)) {
+            medico.getHorariosAtendimento().remove(horarioId);
+            medicoRepository.save(medico);
+            return true;
         }
-        return false;
-    }
-
-    public boolean desvincular(Long m_id, Long c_id) {
-        Medico m = this.medicoRepository.findById(m_id).orElse(new NullMedico());
-        if (!m.isNull() && m.getClinicas_id().contains(c_id)) {
-                m.desvincular(c_id);
-                this.salvar(m);
-                return true;
-            }
         return false;
     }
 

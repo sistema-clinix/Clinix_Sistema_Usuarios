@@ -38,15 +38,16 @@ public class GerenteService {
     public void deletar(Long id) {
         this.gerenteRepository.deleteById(id);
     }
-    public List<Long> listarClinicas(Long g_id) {
-        Gerente g = this.gerenteRepository.findById(g_id).orElse(new NullGerente());
-        return g.getClinicas_id();
-    }
-    
+
+//    public List<Long> listarClinicas(Long g_id) {
+//        Gerente g = this.gerenteRepository.findById(g_id).orElse(new NullGerente());
+//        return g.getClinicas();
+//    }
+
 /*     public Gerente findGerenteByClinic(ClinicaDTO c){
         return this.gerenteRepository.findByClinicaId(c.id()).orElse( new NullGerente());
     } */
-    
+
     /**
      * Armazena a referência do id de uma clínica a um determinado gerente
      * @param g_id id do gerente
@@ -71,7 +72,7 @@ public class GerenteService {
      */
     public Boolean removerClinica(Long g_id, ClinicaDTO c) {
         Gerente g = this.gerenteRepository.findById(g_id).orElse(new NullGerente());
-        
+
         /******* TO DO **********/
         /******* Regras negociais **********/
         if(g.isNull()){
