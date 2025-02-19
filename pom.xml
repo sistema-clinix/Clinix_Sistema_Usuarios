@@ -94,16 +94,6 @@
             <artifactId>grpc-stub</artifactId>
             <version>1.54.0</version>
         </dependency>
-        <dependency>
-            <groupId>com.google.protobuf</groupId>
-            <artifactId>protobuf-java</artifactId>
-            <version>4.28.2</version>
-        </dependency>
-        <dependency>
-            <groupId>org.glassfish</groupId>
-            <artifactId>javax.annotation</artifactId>
-            <version>10.0-b28</version>
-        </dependency>
     </dependencies>
 
     <build>

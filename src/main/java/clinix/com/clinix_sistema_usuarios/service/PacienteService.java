@@ -1,5 +1,7 @@
 package clinix.com.clinix_sistema_usuarios.service;
 
+import clinix.com.clinix_sistema_usuarios.dto.MedicoRmiDTO;
+import clinix.com.clinix_sistema_usuarios.dto.PacienteRmiDTO;
 import clinix.com.clinix_sistema_usuarios.model.Paciente;
 import clinix.com.clinix_sistema_usuarios.model.Usuario;
 import clinix.com.clinix_sistema_usuarios.repository.PacienteRepository;
@@ -25,6 +27,10 @@ public class PacienteService {
 
     public Paciente buscarPorId(Long id) {
         return this.pacienteRepository.findById(id).orElse(null);
+    }
+
+    public PacienteRmiDTO buscarPorIdRmiDto(Long id) {
+        return this.pacienteRepository.findPacienteRmiDTOById(id);
     }
 
     public Paciente salvar(Paciente paciente) {

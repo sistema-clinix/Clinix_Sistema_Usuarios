@@ -8,7 +8,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import scheduling.SchedulingServiceGrpc;
 
 import java.util.List;
 
@@ -17,13 +16,11 @@ import java.util.List;
 public class MedicoController {
 
     private final MedicoService medicoService;
-    private final SchedulingServiceGrpc.SchedulingServiceBlockingStub schedulingStub;
 
     @Autowired
-    public MedicoController(MedicoService medicoService, SchedulingServiceGrpc.SchedulingServiceBlockingStub schedulingStub) {
+    public MedicoController(MedicoService medicoService) {
 
         this.medicoService = medicoService;
-        this.schedulingStub = schedulingStub;
     }
 
     @GetMapping("/list")
@@ -52,6 +49,11 @@ public class MedicoController {
         this.medicoService.deletar(id);
     }
 
+//    @GetMapping("/{id}/horarios/detalhes")
+//    public List<Scheduling.HorarioAtendimentoResponse> listarDetalhesHorarios(@PathVariable Long id) {
+//        return medicoService.listarDetalhesHorarios(id);
+//    }
+
 //    @PostMapping("/{id}/horarios")
 //    public ResponseEntity<String> adicionarHorarios(@PathVariable Long id, @RequestBody List<HorarioAtendimento> horarios) {
 //        Medico medico = medicoService.buscarPorId(id);
@@ -72,10 +74,10 @@ public class MedicoController {
         return medicoService.listarHorariosPorMedico(id);
     }
 
-    @PutMapping("/{id}/horarios/vincular/{horarioId}")
-    public boolean vincularHorario(@PathVariable Long id, @PathVariable Long horarioId) {
-        return medicoService.vincularHorario(id, horarioId);
-    }
+//    @PutMapping("/{id}/horarios/vincular/{horarioId}")
+//    public boolean vincularHorario(@PathVariable Long id, @PathVariable Long horarioId) {
+//        return medicoService.vincularHorario(id, horarioId);
+//    }
 
     @PutMapping("/{id}/horarios/desvincular/{horarioId}")
     public boolean desvincularHorario(@PathVariable Long id, @PathVariable Long horarioId) {

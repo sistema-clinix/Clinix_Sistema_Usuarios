@@ -12,6 +12,7 @@ import jakarta.persistence.Table;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
+import java.io.Serializable;
 import java.sql.Time;
 import java.util.ArrayList;
 import java.util.List;
@@ -20,7 +21,7 @@ import java.util.List;
 @Data
 @EqualsAndHashCode(callSuper=false)
 @Table(name = "tb_medico")
-public class Medico extends Usuario{
+public class Medico extends Usuario implements Serializable {
     
     @ElementCollection
     @CollectionTable(name = "tb_medico_clinica", joinColumns = @JoinColumn(name = "m_id"))

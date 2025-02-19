@@ -1,11 +1,13 @@
 package clinix.com.clinix_sistema_usuarios.service;
 
+import clinix.com.clinix_sistema_usuarios.dto.MedicoRmiDTO;
 import clinix.com.clinix_sistema_usuarios.model.Medico;
 import clinix.com.clinix_sistema_usuarios.model.NullMedico;
 import clinix.com.clinix_sistema_usuarios.repository.MedicoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -28,6 +30,10 @@ public class MedicoService {
         return this.medicoRepository.findById(id).orElse(new NullMedico());
     }
 
+    public MedicoRmiDTO buscarPorIdRmiDto(Long id) {
+        return this.medicoRepository.findMedicoRmiDTOById(id);
+    }
+
     public Medico salvar(Medico medico) {
         return this.medicoRepository.save(medico);
     }
@@ -46,16 +52,6 @@ public class MedicoService {
     public List<Long> listarHorariosPorMedico(Long medicoId) {
         Medico medico = buscarPorId(medicoId);
         return medico != null ? medico.getHorariosAtendimento() : null;
-    }
-
-    public boolean vincularHorario(Long medicoId, Long horarioId) {
-        Medico medico = buscarPorId(medicoId);
-        if (medico != null && !medico.getHorariosAtendimento().contains(horarioId)) {
-            medico.getHorariosAtendimento().add(horarioId);
-            medicoRepository.save(medico);
-            return true;
-        }
-        return false;
     }
 
     public boolean desvincularHorario(Long medicoId, Long horarioId) {

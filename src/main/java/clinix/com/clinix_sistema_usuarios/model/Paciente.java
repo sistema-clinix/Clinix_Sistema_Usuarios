@@ -7,11 +7,13 @@ import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.io.Serializable;
+
 @EqualsAndHashCode(callSuper = true)
 @Entity
 @Data
 @Table(name = "tb_paciente")
-public class Paciente extends Usuario {
+public class Paciente extends Usuario implements Serializable {
 
     public Paciente(String nome, String nomeUsuario, String email, String senha, String cpf, String rg) {
         super(nome, nomeUsuario, email, senha, cpf, rg);
