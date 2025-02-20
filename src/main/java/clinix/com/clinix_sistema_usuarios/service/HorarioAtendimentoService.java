@@ -18,6 +18,10 @@ public class HorarioAtendimentoService {
         this.horarioAtendimentoRepository = horarioAtendimentoRepository;
     }
 
+    public List<HorarioAtendimento> listarHorariosOcupados() {
+        return horarioAtendimentoRepository.findByReservadoTrue();
+    }
+
     public List<HorarioAtendimento> listarHorarios() {
         return horarioAtendimentoRepository.findAll();
     }

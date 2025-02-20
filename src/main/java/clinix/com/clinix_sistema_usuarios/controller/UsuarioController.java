@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/")
+@RequestMapping("/usuario")
 public class UsuarioController {
 
     private UsuarioService usuarioService;
@@ -37,12 +37,12 @@ public class UsuarioController {
         return this.usuarioService.salvar(usuario);
     }
 
-    @PutMapping("/{id}")
+    @PutMapping("/atualizar/{id}")
     public Usuario atualizar(@RequestBody Usuario usuario) {
         return this.usuarioService.atualizar(usuario);
     }
 
-    @DeleteMapping("/{id}")
+    @DeleteMapping("deletar/{id}")
     public void deletar(@PathVariable Long id) {
         this.usuarioService.deletar(id);
     }

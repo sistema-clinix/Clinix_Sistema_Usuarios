@@ -35,13 +35,12 @@ public class GerenteController {
         return this.gerenteService.salvar(gerente);
     }
 
-
-    @PutMapping("/{id}")
+    @PutMapping("/atualizar/{id}")
     public Gerente atualizar(@RequestBody Gerente gerente) {
         return this.gerenteService.atualizar(gerente);
     }
 
-    @DeleteMapping("/{id}")
+    @DeleteMapping("/deletar/{id}")
     public void deletar(@PathVariable Long id) {
         this.gerenteService.deletar(id);
     }

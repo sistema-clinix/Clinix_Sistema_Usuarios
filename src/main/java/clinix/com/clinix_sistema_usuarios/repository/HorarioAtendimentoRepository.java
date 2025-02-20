@@ -6,6 +6,8 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import java.util.List;
 
 public interface HorarioAtendimentoRepository extends JpaRepository<HorarioAtendimento, Long> {
+
+    List<HorarioAtendimento> findByReservadoTrue();
     List<HorarioAtendimento> findByMedicoIdAndReservadoFalse(Long medicoId);
 
     List<HorarioAtendimento> findByMedicoIdAndReservadoTrue(Long medicoId);
