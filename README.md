@@ -16,5 +16,7 @@ Para executar esse projeto é necessário:
 - Apache Tomcat
 - PostgreSQL
 
-Atenção: no arquivo estagioTrack\src\main\resources\application.properties existem configurações referentes ao banco de dados local, configure os campos necessários de acordo as configurações do seu banco de dados.  
+Atenção: 
+  - No arquivo estagioTrack\src\main\resources\application.properties existem configurações referentes ao banco de dados local, configure os campos necessários de acordo as configurações do seu banco de dados. 
+  - O banco de dados criado no PostgreSQL deve ter no nome "clinixSistemaUsuarios".
 
