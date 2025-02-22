@@ -5,8 +5,6 @@ import clinix.com.clinix_sistema_usuarios.model.Medico;
 import clinix.com.clinix_sistema_usuarios.service.MedicoService;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -69,19 +67,19 @@ public class MedicoController {
 //        return ResponseEntity.ok("Horários adicionados com sucesso!");
 //    }
 
-    @GetMapping("/{id}/horarios")
-    public List<Long> listarHorarios(@PathVariable Long id) {
-        return medicoService.listarHorariosPorMedico(id);
-    }
+    // @GetMapping("/{id}/horarios")
+    // public List<Long> listarHorarios(@PathVariable Long id) {
+    //     return medicoService.listarHorariosPorMedico(id);
+    // }
 
 //    @PutMapping("/{id}/horarios/vincular/{horarioId}")
 //    public boolean vincularHorario(@PathVariable Long id, @PathVariable Long horarioId) {
 //        return medicoService.vincularHorario(id, horarioId);
 //    }
 
-    @PutMapping("/{id}/horarios/desvincular/{horarioId}")
-    public boolean desvincularHorario(@PathVariable Long id, @PathVariable Long horarioId) {
-        return medicoService.desvincularHorario(id, horarioId);
-    }
+    // @PutMapping("/{id}/horarios/desvincular/{horarioId}")
+    // public boolean desvincularHorario(@PathVariable Long id, @PathVariable Long horarioId) {
+    //     return medicoService.desvincularHorario(id, horarioId);
+    // }
 
 }

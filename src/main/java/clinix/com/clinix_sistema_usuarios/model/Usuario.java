@@ -1,34 +1,31 @@
 package clinix.com.clinix_sistema_usuarios.model;
 
-import clinix.com.clinix_sistema_usuarios.repository.UsuarioRepository;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
-import lombok.AllArgsConstructor;
 import lombok.Data;
-import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 import java.util.Date;
 
 @Data
+@Entity
+@Table(name = "tb_usuario")
 @NoArgsConstructor
-@AllArgsConstructor
-@MappedSuperclass
+@Inheritance(strategy = InheritanceType.SINGLE_TABLE)  // Define a herança como SINGLE_TABLE
+@DiscriminatorColumn(name = "tipo_usuario", discriminatorType = DiscriminatorType.STRING)  // Define a coluna discriminadora
 public abstract class Usuario {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    //@Column(nullable = false)
     @NotBlank(message = "O nome é obrigatório.")
     private String nome;
 
     @NotBlank(message = "O nome de usuário é obrigatório.")
-    //@Column(unique = true, nullable = false)
     private String nomeUsuario;
 
     private String CPF;
@@ -42,7 +39,6 @@ public abstract class Usuario {
 
     @Email(message = "Por favor, insira um email válido.")
     @NotBlank(message = "O email é obrigatório.")
-    //@Column(unique = true, nullable = false)
     private String email;
 
     @Size(max = 60)
@@ -70,81 +66,16 @@ public abstract class Usuario {
         this.enabled = true;
     }
 
-    //Getters e Setters
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public String getNome() {
-        return nome;
-    }
-
-    public void setNome(String nome) {
-        this.nome = nome;
-    }
-
-    public String getNomeUsuario() {
-        return nomeUsuario;
-    }
-
-    public void setNomeUsuario(String nomeUsuario) {
-        this.nomeUsuario = nomeUsuario;
-    }
-
-    public String getCpf() {
-        return CPF;
-    }
-
-    public void setCpf(String cpf) {
-        this.CPF = cpf;
-    }
-
-    public String getRg() {
-        return RG;
-    }
-
-    public void setRg(String rg) {
-        this.RG = rg;
-    }
-
-    public boolean isEnabled() {
-        return enabled;
-    }
-
-    public void setEnabled(boolean enabled) {
-        this.enabled = enabled;
-    }
-
-    public Date getDataCadastro() {
-        return dataCadastro;
-    }
-
-    public void setDataCadastro(Date dataCadastro) {
-        this.dataCadastro = dataCadastro;
-    }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
-    public String getSenha() {
-        return senha;
-    }
-
-    public void setSenha(String senha) {
-        this.senha = senha;
-    }
-
     public boolean isNull(){
         return false;   
+    }
+
+    public String getCPF() {
+        return this.CPF;
+    }
+
+    public String getRG() {
+        return this.RG;
     }
 
 }

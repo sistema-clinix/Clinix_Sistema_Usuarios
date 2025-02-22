@@ -1,9 +1,6 @@
 package clinix.com.clinix_sistema_usuarios.repository;
 
 import clinix.com.clinix_sistema_usuarios.model.Gerente;
-
-import java.util.Optional;
-
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;

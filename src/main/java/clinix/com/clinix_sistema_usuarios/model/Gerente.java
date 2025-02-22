@@ -3,14 +3,18 @@ import java.util.ArrayList;
 import java.util.List;
 
 import jakarta.persistence.*;
-import lombok.Data;
-import lombok.EqualsAndHashCode;
 
-@EqualsAndHashCode(callSuper = true)
 @Entity
-@Table(name = "tb_gerente")
-@Data
+@DiscriminatorValue("GERENTE") 
 public class Gerente extends Usuario {
+
+    public String getCpf() {
+        return super.getCPF();
+    }
+
+    public String getRg() {
+        return super.getRG();
+    }
     
     @ElementCollection
     @CollectionTable(name = "tb_gerente_clinica", joinColumns = @JoinColumn(name = "g_id"))
@@ -32,8 +36,8 @@ public class Gerente extends Usuario {
             this.setNomeUsuario(outroGerente.getNomeUsuario());
             this.setEmail(outroGerente.getEmail());
             this.setSenha(outroGerente.getSenha());
-            this.setCpf(outroGerente.getCpf());
-            this.setRg(outroGerente.getRg());
+            this.setCPF(outroGerente.getCpf());
+            this.setCPF(outroGerente.getRg());
         }
     }
     

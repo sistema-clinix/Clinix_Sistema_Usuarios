@@ -1,11 +1,8 @@
 package clinix.com.clinix_sistema_usuarios.service;
 
-import clinix.com.clinix_sistema_usuarios.dto.MedicoRmiDTO;
 import clinix.com.clinix_sistema_usuarios.dto.PacienteRmiDTO;
 import clinix.com.clinix_sistema_usuarios.model.Paciente;
-import clinix.com.clinix_sistema_usuarios.model.Usuario;
 import clinix.com.clinix_sistema_usuarios.repository.PacienteRepository;
-import clinix.com.clinix_sistema_usuarios.repository.UsuarioRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

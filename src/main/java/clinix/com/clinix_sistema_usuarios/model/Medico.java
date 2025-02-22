@@ -1,16 +1,12 @@
 package clinix.com.clinix_sistema_usuarios.model;
 
 //import clinix.com.clinix_sistema_usuarios.dto.HorarioAtendimento;
-import jakarta.persistence.CascadeType;
 import jakarta.persistence.CollectionTable;
 import jakarta.persistence.Column;
+import jakarta.persistence.DiscriminatorValue;
 import jakarta.persistence.ElementCollection;
 import jakarta.persistence.Entity;
 import jakarta.persistence.JoinColumn;
-import jakarta.persistence.OneToMany;
-import jakarta.persistence.Table;
-import lombok.Data;
-import lombok.EqualsAndHashCode;
 
 import java.io.Serializable;
 import java.sql.Time;
@@ -18,9 +14,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Entity
-@Data
-@EqualsAndHashCode(callSuper=false)
-@Table(name = "tb_medico")
+@DiscriminatorValue("MEDICO")  // Define o valor que será salvo na coluna 'tipo_usuario'
 public class Medico extends Usuario implements Serializable {
     
     @ElementCollection

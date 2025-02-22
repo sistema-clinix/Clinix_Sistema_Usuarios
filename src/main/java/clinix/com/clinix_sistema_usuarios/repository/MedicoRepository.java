@@ -6,8 +6,6 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
-import java.util.List;
-
 @Repository
 public interface MedicoRepository extends JpaRepository<Medico,Long> {
     @Query("SELECT new clinix.com.clinix_sistema_usuarios.dto.MedicoRmiDTO(m.id, m.nome) FROM Medico m WHERE m.id = :id")

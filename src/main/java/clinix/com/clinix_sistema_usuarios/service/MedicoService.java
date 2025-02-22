@@ -6,20 +6,16 @@ import clinix.com.clinix_sistema_usuarios.model.NullMedico;
 import clinix.com.clinix_sistema_usuarios.repository.MedicoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
-import java.util.ArrayList;
 import java.util.List;
 
 @Service
 public class MedicoService {
 
     private final MedicoRepository medicoRepository;
-    private final GerenteService gerenteService;
 
     @Autowired
     public MedicoService(GerenteService gerenteService, MedicoRepository medicoRepository) {
         this.medicoRepository = medicoRepository;
-        this.gerenteService = gerenteService;
     }
 
     public List<Medico> listarTodos() {
@@ -49,19 +45,19 @@ public class MedicoService {
         this.medicoRepository.deleteById(id);
     }
 
-    public List<Long> listarHorariosPorMedico(Long medicoId) {
-        Medico medico = buscarPorId(medicoId);
-        return medico != null ? medico.getHorariosAtendimento() : null;
-    }
+    // public List<Long> listarHorariosPorMedico(Long medicoId) {
+    //     Medico medico = buscarPorId(medicoId);
+    //     return medico != null ? medico.getHorariosAtendimento() : null;
+    // }
 
-    public boolean desvincularHorario(Long medicoId, Long horarioId) {
-        Medico medico = buscarPorId(medicoId);
-        if (medico != null && medico.getHorariosAtendimento().contains(horarioId)) {
-            medico.getHorariosAtendimento().remove(horarioId);
-            medicoRepository.save(medico);
-            return true;
-        }
-        return false;
-    }
+    // public boolean desvincularHorario(Long medicoId, Long horarioId) {
+    //     Medico medico = buscarPorId(medicoId);
+    //     if (medico != null && medico.getHorariosAtendimento().contains(horarioId)) {
+    //         medico.getHorariosAtendimento().remove(horarioId);
+    //         medicoRepository.save(medico);
+    //         return true;
+    //     }
+    //     return false;
+    // }
 
 }
