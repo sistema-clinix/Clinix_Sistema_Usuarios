@@ -1,12 +1,8 @@
 package clinix.com.clinix_sistema_usuarios.controller;
 
-import clinix.com.clinix_sistema_usuarios.model.Medico;
-//import clinix.com.clinix_sistema_usuarios.repository.HorarioAtendimentoRepository;
+import clinix.com.clinix_sistema_usuarios.model.Medico;//import clinix.com.clinix_sistema_usuarios.repository.HorarioAtendimentoRepository;
 import clinix.com.clinix_sistema_usuarios.service.MedicoService;
-
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -15,13 +11,8 @@ import java.util.List;
 @RequestMapping("/medico")
 public class MedicoController {
 
-    private final MedicoService medicoService;
-
     @Autowired
-    public MedicoController(MedicoService medicoService) {
-
-        this.medicoService = medicoService;
-    }
+    private MedicoService medicoService;
 
     @GetMapping("/list")
     public List<Medico> listar() {
@@ -39,12 +30,12 @@ public class MedicoController {
         return this.medicoService.salvar(medico);
     }
 
-    @PutMapping("/update/{id}")
+    @PutMapping("/{id}")
     public Medico atualizar(@RequestBody Medico medico) {
         return this.medicoService.atualizar(medico);
     }
 
-    @DeleteMapping("/delete/{id}")
+    @DeleteMapping("/{id}")
     public void deletar(@PathVariable Long id) {
         this.medicoService.deletar(id);
     }
@@ -69,19 +60,19 @@ public class MedicoController {
 //        return ResponseEntity.ok("Horários adicionados com sucesso!");
 //    }
 
-    @GetMapping("/{id}/horarios")
-    public List<Long> listarHorarios(@PathVariable Long id) {
-        return medicoService.listarHorariosPorMedico(id);
-    }
+    // @GetMapping("/{id}/horarios")
+    // public List<Long> listarHorarios(@PathVariable Long id) {
+    //     return medicoService.listarHorariosPorMedico(id);
+    // }
 
 //    @PutMapping("/{id}/horarios/vincular/{horarioId}")
 //    public boolean vincularHorario(@PathVariable Long id, @PathVariable Long horarioId) {
 //        return medicoService.vincularHorario(id, horarioId);
 //    }
 
-    @PutMapping("/{id}/horarios/desvincular/{horarioId}")
-    public boolean desvincularHorario(@PathVariable Long id, @PathVariable Long horarioId) {
-        return medicoService.desvincularHorario(id, horarioId);
-    }
+    // @PutMapping("/{id}/horarios/desvincular/{horarioId}")
+    // public boolean desvincularHorario(@PathVariable Long id, @PathVariable Long horarioId) {
+    //     return medicoService.desvincularHorario(id, horarioId);
+    // }
 
 }

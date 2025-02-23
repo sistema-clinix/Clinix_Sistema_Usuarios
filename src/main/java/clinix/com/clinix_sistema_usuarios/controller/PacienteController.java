@@ -11,13 +11,8 @@ import java.util.List;
 @RequestMapping("/paciente")
 public class PacienteController {
 
-    private PacienteService pacienteService;
-
     @Autowired
-    public PacienteController(PacienteService pacienteService) {
-
-        this.pacienteService = pacienteService;
-    }
+    private PacienteService pacienteService;
 
     @GetMapping("/list")
     public List<Paciente> listar() {
@@ -35,12 +30,12 @@ public class PacienteController {
         return this.pacienteService.salvar(paciente);
     }
 
-    @PutMapping("/update/{id}")
+    @PutMapping("/{id}")
     public Paciente atualizar(@RequestBody Paciente paciente) {
         return this.pacienteService.atualizar(paciente);
     }
 
-    @DeleteMapping("/delete/{id}")
+    @DeleteMapping("/{id}")
     public void deletar(@PathVariable Long id) {
         this.pacienteService.deletar(id);
     }

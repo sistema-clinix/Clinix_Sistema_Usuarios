@@ -1,42 +1,62 @@
 package clinix.com.clinix_sistema_usuarios.model;
+
+import jakarta.persistence.*;
+import jakarta.validation.constraints.Email;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Size;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
+import java.io.Serializable;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
-import jakarta.persistence.*;
-import lombok.Data;
-import lombok.EqualsAndHashCode;
+import com.fasterxml.jackson.annotation.JsonFormat;
 
-@EqualsAndHashCode(callSuper = true)
 @Entity
-@Table(name = "tb_gerente")
 @Data
-public class Gerente extends Usuario {
-    
+@NoArgsConstructor
+@AllArgsConstructor
+public class Gerente implements Serializable {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+
+    //@Column(nullable = false)
+    @NotBlank(message = "O nome é obrigatório.")
+    private String nome;
+
+    @NotBlank(message = "O nome de usuário é obrigatório.")
+    //@Column(unique = true, nullable = false)
+    private String nomeUsuario;
+
+    private String CPF;
+
+    private String RG;
+
+    private boolean enabled = true;
+
+    @JsonFormat(pattern = "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'")
+    private LocalDateTime dataCadastro;
+
+    @Email(message = "Por favor, insira um email válido.")
+    @NotBlank(message = "O email é obrigatório.")
+    //@Column(unique = true, nullable = false)
+    private String email;
+
+    @Size(max = 60)
+    @NotBlank(message = "A senha é obrigatória e não pode estar vazia.")
+    private String senha;
+
     @ElementCollection
-    @CollectionTable(name = "tb_gerente_clinica", joinColumns = @JoinColumn(name = "g_id"))
-    @Column(name= "clinica_id")
+    @CollectionTable(name = "gerencias", joinColumns = @JoinColumn(name = "gerente_id"))
+    @Column(name = "clinica_id")
     private List<Long> clinicas = new ArrayList<>();
-
-    public Gerente(String nome, String nomeUsuario, String email, String senha, String cpf, String rg) {
-        super(nome, nomeUsuario, email, senha, cpf, rg);
-    }
-
-    public Gerente() {
-        super("", "", "", "","","");
-    }
-
-    @Override
-    public void atualizar(Usuario outroUsuario) {
-        if (outroUsuario instanceof Gerente outroGerente) {
-            this.setNome(outroGerente.getNome());
-            this.setNomeUsuario(outroGerente.getNomeUsuario());
-            this.setEmail(outroGerente.getEmail());
-            this.setSenha(outroGerente.getSenha());
-            this.setCpf(outroGerente.getCpf());
-            this.setRg(outroGerente.getRg());
-        }
-    }
     
+
     public boolean cadastrarClinica(Long c_id){
         if (this.clinicas.contains(c_id)) return false;
         return clinicas.add(c_id);
@@ -49,5 +69,9 @@ public class Gerente extends Usuario {
 
     public List<Long> listarClinicas(){
         return new ArrayList<>(this.clinicas);
+    }
+
+    public boolean isNull(){
+        return false;   
     }
 }

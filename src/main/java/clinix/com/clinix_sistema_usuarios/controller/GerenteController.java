@@ -14,13 +14,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 @RequestMapping("/gerente")
 public class GerenteController {
 
-    private GerenteService gerenteService;
-
     @Autowired
-    public GerenteController(GerenteService gerenteService) {
-
-        this.gerenteService = gerenteService;
-    }
+    private GerenteService gerenteService;
 
     @GetMapping("/list")
     public List<Gerente> listar() {

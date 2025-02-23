@@ -49,19 +49,19 @@ public class MedicoService {
         this.medicoRepository.deleteById(id);
     }
 
-    public List<Long> listarHorariosPorMedico(Long medicoId) {
-        Medico medico = buscarPorId(medicoId);
-        return medico != null ? medico.getHorariosAtendimento() : null;
-    }
+    // public List<Long> listarHorariosPorMedico(Long medicoId) {
+    //     Medico medico = buscarPorId(medicoId);
+    //     return medico != null ? medico.getHorariosAtendimento() : null;
+    // }
 
-    public boolean desvincularHorario(Long medicoId, Long horarioId) {
-        Medico medico = buscarPorId(medicoId);
-        if (medico != null && medico.getHorariosAtendimento().contains(horarioId)) {
-            medico.getHorariosAtendimento().remove(horarioId);
-            medicoRepository.save(medico);
-            return true;
-        }
-        return false;
-    }
+    // public boolean desvincularHorario(Long medicoId, Long horarioId) {
+    //     Medico medico = buscarPorId(medicoId);
+    //     if (medico != null && medico.getHorariosAtendimento().contains(horarioId)) {
+    //         medico.getHorariosAtendimento().remove(horarioId);
+    //         medicoRepository.save(medico);
+    //         return true;
+    //     }
+    //     return false;
+    // }
 
 }

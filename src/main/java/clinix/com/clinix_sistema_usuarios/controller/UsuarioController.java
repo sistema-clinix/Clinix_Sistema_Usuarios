@@ -1,49 +1,50 @@
+// package clinix.com.clinix_sistema_usuarios.controller;
 
+// import clinix.com.clinix_sistema_usuarios.model.Usuario;
+// import clinix.com.clinix_sistema_usuarios.service.UsuarioServiceImpl;
+// import jakarta.validation.Valid;
+// import org.springframework.beans.factory.annotation.Autowired;
+// import org.springframework.http.HttpStatus;
+// import org.springframework.http.ResponseEntity;
+// import org.springframework.web.bind.annotation.*;
 
-package clinix.com.clinix_sistema_usuarios.controller;
+// import java.util.List;
 
-import clinix.com.clinix_sistema_usuarios.model.Usuario;
-import clinix.com.clinix_sistema_usuarios.model.Paciente;
-import clinix.com.clinix_sistema_usuarios.service.UsuarioServiceImpl;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.*;
+// @RestController
+// @RequestMapping("/usuario")
+// public class UsuarioController {
 
-import java.util.List;
+//     @Autowired
+//     private UsuarioServiceImpl usuarioServiceImpl;
 
-@RestController
-@RequestMapping("/usuario")
-public class UsuarioController {
+//     // public UsuarioController(UsuarioServiceImpl usuarioServiceImpl) {
+//     //     this.usuarioServiceImpl = usuarioServiceImpl;
+//     // }
 
-    private UsuarioServiceImpl usuarioServiceImpl;
+//     @GetMapping("/list")
+//     public List<Usuario> listar() {
+//         return this.usuarioServiceImpl.listarTodos();
+//     }
 
-    @Autowired
-    public UsuarioController(UsuarioServiceImpl usuarioServiceImpl) {
-        this.usuarioServiceImpl = usuarioServiceImpl;
-    }
+//     @GetMapping("/{id}")
+//     public Usuario buscar(@PathVariable Long id) {
+//         return this.usuarioServiceImpl.buscarPorId(id);
+//     }
 
-    @GetMapping("/list")
-    public List<Usuario> listar() {
-        return this.usuarioServiceImpl.listarTodos();
-    }
+//     @PostMapping("/save")
+//     public ResponseEntity<Usuario> criar(@Valid @RequestBody Usuario usuario) {
+//         System.out.println("Recebendo usuário: " + usuario);
+//         Usuario usuarioSalvo = this.usuarioServiceImpl.salvar(usuario);
+//         return new ResponseEntity<>(usuarioSalvo, HttpStatus.CREATED);
+//     }
 
-    @GetMapping("/{id}")
-    public Usuario buscar(@PathVariable Long id) {
-        return this.usuarioServiceImpl.buscarPorId(id);
-    }
+//     @PutMapping("/{id}")
+//     public Usuario atualizar(@RequestBody Usuario usuario) {
+//         return this.usuarioServiceImpl.atualizar(usuario);
+//     }
 
-    @PostMapping("/save")
-    public Usuario criar(@RequestBody Paciente usuario) {
-        System.out.println("Recebendo usuário: " + usuario);
-        return this.usuarioServiceImpl.salvar(usuario);
-    }
-
-    @PutMapping("/{id}")
-    public Usuario atualizar(@RequestBody Usuario usuario) {
-        return this.usuarioServiceImpl.atualizar(usuario);
-    }
-
-    @DeleteMapping("/{id}")
-    public void deletar(@PathVariable Long id) {
-        this.usuarioServiceImpl.deletar(id);
-    }
-}
+//     @DeleteMapping("/{id}")
+//     public void deletar(@PathVariable Long id) {
+//         this.usuarioServiceImpl.deletar(id);
+//     }
+// }

@@ -9,7 +9,4 @@ public class ClinixSistemaUsuariosApplication {
     public static void main(String[] args) {
         SpringApplication.run(ClinixSistemaUsuariosApplication.class, args);
     }
-
 }
-
-
