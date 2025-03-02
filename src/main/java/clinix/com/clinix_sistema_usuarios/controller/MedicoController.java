@@ -7,6 +7,7 @@ import clinix.com.clinix_sistema_usuarios.service.MedicoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Arrays;
 import java.util.List;
 
 @RestController
@@ -43,6 +44,11 @@ public class MedicoController {
     @DeleteMapping("/{id}")
     public void deletar(@PathVariable Long id) {
         this.medicoService.deletar(id);
+    }
+
+    @GetMapping("/especialidades")
+    public List<Especialidade> getEspecialidades() {
+        return Arrays.asList(Especialidade.values());
     }
 
     @GetMapping("/filtrar")
