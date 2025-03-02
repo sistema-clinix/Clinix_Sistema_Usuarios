@@ -1,5 +1,6 @@
 package clinix.com.clinix_sistema_usuarios.repository;
 import clinix.com.clinix_sistema_usuarios.dto.MedicoRmiDTO;
+import clinix.com.clinix_sistema_usuarios.model.Especialidade;
 import clinix.com.clinix_sistema_usuarios.model.Medico;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
@@ -12,6 +13,12 @@ import java.util.List;
 public interface MedicoRepository extends JpaRepository<Medico,Long> {
     @Query("SELECT new clinix.com.clinix_sistema_usuarios.dto.MedicoRmiDTO(m.id, m.nome) FROM Medico m WHERE m.id = :id")
     MedicoRmiDTO findMedicoRmiDTOById(@Param("id") Long id);
+
+    List<Medico> findByEspecialidade(Especialidade especialidade);
+
+
+
+
 }
 
 

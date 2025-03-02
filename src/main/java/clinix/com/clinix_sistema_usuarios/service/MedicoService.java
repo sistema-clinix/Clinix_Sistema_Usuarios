@@ -1,6 +1,7 @@
 package clinix.com.clinix_sistema_usuarios.service;
 
 import clinix.com.clinix_sistema_usuarios.dto.MedicoRmiDTO;
+import clinix.com.clinix_sistema_usuarios.model.Especialidade;
 import clinix.com.clinix_sistema_usuarios.model.Medico;
 import clinix.com.clinix_sistema_usuarios.model.NullMedico;
 import clinix.com.clinix_sistema_usuarios.repository.MedicoRepository;
@@ -63,5 +64,9 @@ public class MedicoService {
     //     }
     //     return false;
     // }
+
+    public List<Medico> buscarPorEspecialidade(Especialidade especialidade) {
+        return medicoRepository.findByEspecialidade(especialidade);
+    }
 
 }

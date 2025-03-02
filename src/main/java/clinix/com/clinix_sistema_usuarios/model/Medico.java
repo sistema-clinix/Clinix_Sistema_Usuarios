@@ -1,14 +1,7 @@
 package clinix.com.clinix_sistema_usuarios.model;
 
 //import clinix.com.clinix_sistema_usuarios.dto.HorarioAtendimento;
-import jakarta.persistence.CollectionTable;
-import jakarta.persistence.Column;
-import jakarta.persistence.ElementCollection;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
+import jakarta.persistence.*;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
@@ -69,6 +62,9 @@ public class Medico implements Serializable {
     @CollectionTable(name = "vinculos", joinColumns = @JoinColumn(name = "m_id"))
     @Column(name = "c_id")
     private List<Long> clinicas_id = new ArrayList<>();
+
+    @Enumerated(EnumType.STRING)
+    private Especialidade especialidade;
 
     // private List<Agendamento> consultasAgendadas;
     // private List<Consulta> consultasRealizadas;

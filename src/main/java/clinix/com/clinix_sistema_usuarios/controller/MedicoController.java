@@ -1,6 +1,8 @@
 package clinix.com.clinix_sistema_usuarios.controller;
 
+import clinix.com.clinix_sistema_usuarios.model.Especialidade;
 import clinix.com.clinix_sistema_usuarios.model.Medico;//import clinix.com.clinix_sistema_usuarios.repository.HorarioAtendimentoRepository;
+import clinix.com.clinix_sistema_usuarios.repository.MedicoRepository;
 import clinix.com.clinix_sistema_usuarios.service.MedicoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -13,6 +15,9 @@ public class MedicoController {
 
     @Autowired
     private MedicoService medicoService;
+
+    @Autowired
+    private MedicoRepository medicoRepository;
 
     @GetMapping("/list")
     public List<Medico> listar() {
@@ -39,6 +44,17 @@ public class MedicoController {
     public void deletar(@PathVariable Long id) {
         this.medicoService.deletar(id);
     }
+
+    @GetMapping("/filtrar")
+    public List<Medico> buscarPorEspecialidade(@RequestParam Especialidade especialidade) {
+        return medicoRepository.findByEspecialidade(especialidade);
+    }
+
+
+
+
+
+
 
 //    @GetMapping("/{id}/horarios/detalhes")
 //    public List<Scheduling.HorarioAtendimentoResponse> listarDetalhesHorarios(@PathVariable Long id) {
